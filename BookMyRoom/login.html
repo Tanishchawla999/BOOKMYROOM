@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Form</title>
+    <link rel="stylesheet" href="loginst.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <form onsubmit="return login(event)">
+        <h2>Login</h2>
+        <div class="input-group">
+          <label for="Username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter your Username"
+            required
+          />
+        </div>
+
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+          />
+        </div>
+
+        <div class="links">
+          <a onclick="devName()">Forget Password?</a>
+        </div>
+
+        <button type="submit">Login</button>
+
+        <p class="signup-link">
+          Not a Member? <a href="signup.html">Signup</a>
+        </p>
+      </form>
+    </div>
+  </body>
+  <script>
+    function login(event) {
+      event.preventDefault();
+
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      if (username === "Tanish" && password === "Tani$") {
+        alert("login successful");
+        window.location.href = "index.html";
+      } else {
+        alert("login failed");
+      }
+    }
+  </script>
+  <script>
+    function devName() {
+      const guess = prompt("Enter developer Name:");
+      if (guess === "Tanish" || guess === "Ayush") {
+        alert("You guessed it right!!");
+        // alert("Otp sent to your Number");
+        window.location.href = "index.html";
+      } else {
+        alert("You guessed it wrong 😔");
+      }
+    }
+  </script>
+</html>

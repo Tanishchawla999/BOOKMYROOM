@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BookMyRoom</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: white;
+        font-family: "Poppins", sans-serif;
+      }
+      nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 60px;
+        background-color: darkblue;
+        color: white;
+      }
+
+      .left {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+      }
+
+      nav ul li {
+        margin: 0 15px;
+      }
+
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      nav ul li a:hover {
+        color: rgb(228, 97, 226);
+      }
+
+      .dropdown {
+        position: relative;
+      }
+
+      .dropdown-button {
+        background-color: #0e0db8;
+        color: white;
+        border: 1px solid #6176da;
+        padding: 6px 11px;
+        border-radius: 5px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: white;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 99;
+      }
+
+      .dropdown-content a {
+        padding: 10px 15px;
+        display: block;
+        color: black;
+        text-decoration: none;
+      }
+
+      .dropdown-content a:hover {
+        background-color: #ddd;
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+      .container {
+        display: flex;
+        margin: 22px 46px;
+        padding: 21px;
+      }
+
+      .boldhead {
+        font-weight: bold;
+        font-size: 25px;
+        color: black;
+        /* margin-left: 30px; */
+        margin: 24px 76px;
+      }
+.available-rooms{
+  font-size: 20px;
+}
+      .desc,
+      .amt,
+      .available-rooms {
+        color: black;
+      }
+
+      .amt {
+        font-weight: 600;
+        font-size: 18px;
+      }
+
+      .booking-container {
+        margin-top: 10px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .book-button {
+        padding: 5px 15px;
+        background-color: green;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-weight: 600;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.5s ease;
+        transition: transform 0.5s ease;
+      }
+      .book-button:hover {
+        background-color: red;
+        transform: scale(1.05);
+      }
+      .detail {
+        padding: 5px 20px;
+        background-color: green;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-weight: 600;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .book-button:disabled {
+        background: gray;
+        cursor: not-allowed;
+      }
+
+      .image-slider {
+        position: relative;
+        width: 300px;
+        overflow: hidden;
+      }
+
+      .slider-track {
+        display: flex;
+        transition: transform 0.4s ease-in-out;
+      }
+
+      .slide {
+        min-width: 100%;
+      }
+
+      .slide img {
+        width: 100%;
+        border-radius: 25px;
+        border: 2px solid black;
+      }
+
+      .slide-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        font-size: 20px;
+        padding: 8px 12px;
+        cursor: pointer;
+        border-radius: 5px;
+        z-index: 1;
+      }
+
+      .slide-btn.left {
+        left: 10px;
+      }
+
+      .slide-btn.right {
+        right: 10px;
+      }
+
+      footer {
+        background-color: darkblue;
+        padding: 20px 0;
+        text-align: center;
+        color: white;
+      }
+
+      hr {
+        margin: 0px;
+        border: 0;
+        border-top: 2px solid #ccc;
+      }
+      .desc{
+        font-size: 15px;
+        margin-left: 2px;
+      }
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        background: white;
+        padding: 40px;
+        border-radius: 10px;
+        width: 380px;
+        text-align: left;
+        height: 493px;
+      }
+
+      .modal-content h2 {
+        margin-top: 0;
+      }
+
+      .input-group {
+        margin-bottom: 15px;
+      }
+
+      .input-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        font-size: 15px;
+      }
+
+      .input-group input,
+      .input-group select {
+        width: 100%;
+        padding: 5px;
+        box-sizing: border-box;
+      }
+
+      .close {
+        float: right;
+        cursor: pointer;
+        font-size: 22px;
+        font-weight: bold;
+      }
+      .name-error {
+        font-size: 12px;
+      }
+     
+    </style>
+  </head>
+  <body>
+
+    <header>
+      <nav>
+        <div class="left">BookMyRoom</div>
+        <ul class="right">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li class="dropdown">
+            <button class="dropdown-button">
+              Select an area
+            </button>
+            <div class="dropdown-content">
+              <a href="#" onclick="filterArea(event, 'all')">All Areas</a>
+              <a href="#" onclick="filterArea(event, 'Kothrud')">Kothrud</a>
+              <a href="#" onclick="filterArea(event, 'Hinjewadi')">Hinjewadi</a>
+              <a href="#" onclick="filterArea(event, 'Katraj')">Katraj</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <div id="listings">
+      <div class="listing-wrapper" data-area="Katraj">
+        <div class="container">
+          <div class="image-slider" data-index="0">
+            <button class="slide-btn left" onclick="slideImages(this, -1)">&#10094;</button>
+            <div class="slider-track">
+              <div class="slide"><img src="/katraj pg/2.jpeg" alt="Image 1" /></div>
+              <div class="slide"><img src="/katraj pg/2.1.jpeg" alt="Image 2" /></div>
+            </div>
+            <button class="slide-btn right" onclick="slideImages(this, 1)">&#10095;</button>
+          </div>
+          <div class="boldhead">
+            Green Country Katraj, Pune
+            <div class="desc">Facilities: Wi-Fi, Parking Area, Gym</div>
+            <div class="amt"><span>&#8377;</span> 5500</div>
+            <div class="booking-container">
+              <div class="available-rooms">Available Rooms: <span class="room-count">5</span></div>
+              <button class="book-button" onclick="showBookingForm(this)">Book Now</button>
+              <div class="modal">
+                <div class="modal-content">
+                  <span class="close" onclick="hideBookingForm(this)">&times;</span>
+                  <h2>Booking Form</h2>
+                  <form class="booking-form">
+                    <div class="input-group">
+                      <label>Full Name</label>
+                      <input type="text" class="name" placeholder="Only Characters" required />
+                      <p class="name-error" style="color: red"></p>
+                    </div>
+  
+                    <div class="input-group">
+                      <label>Check-in Date</label>
+                      <input type="date" class="checkin" required />
+                    </div>
+  
+                    <div class="input-group">
+                      <label>Check-out Date</label>
+                      <input type="date" class="checkout" required />
+                    </div>
+  
+                    <div class="input-group">
+                      <label>Select Payment mode</label>
+                      <select class="payment" required>
+                        <option value="">select</option>
+                        <option value="Online">Online</option>
+                        <option value="Cash">Cash</option>
+                      </select>
+                    </div>
+  
+                    <button type="submit" class="book-button">Submit</button>
+                    <div class="available-rooms">Available Rooms: <span class="room-count">5</span></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr />
+      </div>
+      <!-- katraj 2 -->
+      <div class="listing-wrapper" data-area="Katraj">
+        <div class="container">
+          <div class="image-slider" data-index="0">
+            <button class="slide-btn left" onclick="slideImages(this, -1)">
+              &#10094;
+            </button>
+            <div class="slider-track">
+              <div class="slide">
+                <img src="/katraj pg/3.jpeg" alt="Image 1" />
+              </div>
+              <div class="slide">
+                <img src="/katraj pg//3.1.jpeg" alt="Image 2" />
+              </div>
+            </div>
+            <button class="slide-btn right" onclick="slideImages(this, 1)">
+              &#10095;
+            </button>
+          </div>
+          <div class="boldhead">
+            Goel Ganga Hill Mist Garden Katraj, Pune
+            <div class="desc">Facilities:</div>
+            <div class="amt"><span>&#8377;</span> 6000</div>
+            <div class="booking-container">
+              <div class="available-rooms">Available Rooms: <span class="room-count">5</span></div>
+              <button class="book-button" onclick="showBookingForm(this)">Book Now</button>
+
+              <div class="modal">
+                <div class="modal-content">
+                  <span class="close" onclick="hideBookingForm(this)"
+                    >&times;</span
+                  >
+                  <h2>Booking Form</h2>
+                  <form class="booking-form">
+                    <div class="input-group">
+                      <label >Full Name</label>
+                      <input type="text" placeholder="Only Character" class="name" required />
+                      <p class="name-error" style="color: red"></p>
+                    </div>
+
+                    <div class="input-group">
+                      <label >Check-in Date</label>
+                      <input type="date" class="checkin" required />
+                    </div>
+
+                    <div class="input-group">
+                      <label>Check-out Date</label>
+                      <input type="date" class="checkout" required />
+                    </div>
+
+                    <div class="input-group">
+                      <label >Select Payment mode</label>
+                      <select class="payment" required>
+                        <option value="">select</option>
+                        <option value="Online">Online</option>
+                        <option value="Cash">Cash</option>
+                      </select>
+                    </div>
+
+                    <button type="submit" class="book-button">Submit</button>
+                    <div class="available-rooms">
+                      Available Rooms: <span class="room-count">5</span>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr />
+      </div>
+ <!-- katraj 3 -->
+ <div class="listing-wrapper" data-area="Katraj">
+  <div class="container">
+    <div class="image-slider" data-index="0">
+      <button class="slide-btn left" onclick="slideImages(this, -1)">
+        &#10094;
+      </button>
+      <div class="slider-track">
+        <div class="slide">
+          <img src="katraj pg/1.1.jpeg" alt="Image 1" />
+        </div>
+        <div class="slide"><img src="pg.jpg" alt="Image 2" /></div>
+      </div>
+      <button class="slide-btn right" onclick="slideImages(this, 1)">
+        &#10095;
+      </button>
+    </div>
+    <div class="boldhead">
+      Shiv Dutta Apartments Katraj, Pune
+      <div class="desc">Facilities: 24hrs Water, Parking, Gym</div>
+      <div class="amt"><span>&#8377;</span> 7500</div>
+      <div class="booking-container">
+        <div class="available-rooms">Available Rooms: <span class="room-count">5</span></div>
+        <button class="book-button" onclick="showBookingForm(this)">Book Now</button>
+
+        <div class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="hideBookingForm(this)"
+              >&times;</span
+            >
+            <h2>Booking Form</h2>
+            <form class="booking-form">
+              <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" placeholder="Only Character" class="name" required />
+              </div>
+
+              <div class="input-group">
+                <label >Check-in Date</label>
+                <input type="date" class="checkin" required />
+              </div>
+
+              <div class="input-group">
+                <label>Check-out Date</label>
+                <input type="date" class="checkout" required />
+              </div>
+
+              <div class="input-group">
+                <label >Select Payment mode</label>
+                <select class="payment" required>
+                  <option value="">select</option>
+                  <option value="Online">Online</option>
+                  <option value="Cash">Cash</option>
+                </select>
+              </div>
+
+              <button
+                type="submit"
+                class="book-button">
+               Submit
+              </button>
+
+              <div class="available-rooms">
+                Available Rooms: <span class="room-count">5</span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+</div>
+<!-- hinjewadi 1 -->
+<div class="listing-wrapper" data-area="Hinjewadi">
+  <div class="container">
+    <div class="image-slider" data-index="0">
+      <button class="slide-btn left" onclick="slideImages(this, -1)">
+        &#10094;
+      </button>
+      <div class="slider-track">
+        <div class="slide">
+          <img
+            src="hinjewadi pg/WhatsApp Image 2025-04-13 at 15.49.28 (1).jpeg"
+            alt="Image 1"
+          />
+        </div>
+        <div class="slide">
+          <img
+            src="hinjewadi pg/WhatsApp Image 2025-04-13 at 15.49.28.jpeg"
+            alt="Image 2"
+          />
+        </div>
+      </div>
+      <button class="slide-btn right" onclick="slideImages(this, 1)">
+        &#10095;
+      </button>
+    </div>
+    <div class="boldhead">
+      Welworth Purnam Hinjewadi, Pune
+      <div class="desc">Facilities: Gym, Parking, Garden</div>
+      <div class="amt"><span>&#8377;</span> 8000</div>
+      <div class="booking-container">
+
+        <div class="available-rooms">Available Rooms: <span class="room-count">5</span></div>
+        <button class="book-button" onclick="showBookingForm(this)">Book Now</button>
+
+        <div  class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="hideBookingForm(this)"
+              >&times;</span
+            >
+            <h2>Booking Form</h2>
+            <form class="booking-form">
+              <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" placeholder="Only Character" class="name" required />
+              </div>
+
+              <div class="input-group">
+                <label >Check-in Date</label>
+                <input type="date" class="checkin" required />
+              </div>
+
+              <div class="input-group">
+                <label>Check-out Date</label>
+                <input type="date" class="checkout" required />
+              </div>
+
+              <div class="input-group">
+                <label >Select Payment mode</label>
+                <select class="payment" required>
+                  <option value="">select</option>
+                  <option value="Online">Online</option>
+                  <option value="Cash">Cash</option>
+                </select>
+              </div>
+
+              <button
+                type="submit"
+                class="book-button">
+             Submit
+              </button>
+
+              <div class="available-rooms">
+                Available Rooms: <span class="room-count">5</span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+</div>
+<!-- hinjewadi 2 -->
+<div class="listing-wrapper" data-area="Hinjewadi">
+  <div class="container">
+    <div class="image-slider" data-index="0">
+      <button class="slide-btn left" onclick="slideImages(this, -1)">
+        &#10094;
+      </button>
+      <div class="slider-track">
+        <div class="slide">
+          <img
+            src="hinjewadi pg/WhatsApp Image 2025-04-13 at 15.49.29 (1).jpeg"
+            alt="Image 1"
+          />
+        </div>
+        <div class="slide">
+          <img
+            src="hinjewadi pg/WhatsApp Image 2025-04-13 at 15.49.29.jpeg"
+            alt="Image 2"
+          />
+        </div>
+      </div>
+      <button class="slide-btn right" onclick="slideImages(this, 1)">
+        &#10095;
+      </button>
+    </div>
+    <div class="boldhead">
+      Godrej Evergreen Square Hinjewadi, Pune
+      <div class="desc">Facilities: Wardboy, Quality Foods, Furniture</div>
+      <div class="amt"><span>&#8377;</span> 7000</div>
+      <div class="booking-container">
+        <div class="available-rooms">Available Rooms: <span class="room-count">5</span></div>
+              <button class="book-button" onclick="showBookingForm(this)">Book Now</button>
+
+        <div class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="hideBookingForm(this)"
+              >&times;</span
+            >
+            <h2>Booking Form</h2>
+            <form class="booking-form">
+              <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" class="name" placeholder="Only Characters" required />
+                <p class="name-error" style="color: red"></p>
+              </div>
+
+              <div class="input-group">
+                <label>Check-in Date</label>
+                <input type="date" class="checkin" required />
+              </div>
+
+              <div class="input-group">
+                <label>Check-out Date</label>
+                <input type="date" class="checkout" required />
+              </div>
+
+              <div class="input-group">
+                <label>Select Payment mode</label>
+                <select class="payment" required>
+                  <option value="">select</option>
+                  <option value="Online">Online</option>
+                  <option value="Cash">Cash</option>
+                </select>
+              </div>
+
+              <button type="submit" class="book-button">Submit</button>
+              <div class="available-rooms">Available Rooms: <span class="room-count">5</span></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+</div>
+</div>
+<!-- hinjewadi 3 -->
+<div class="listing-wrapper" data-area="Hinjewadi">
+  <div class="container">
+    <div class="image-slider" data-index="0">
+      <button class="slide-btn left" onclick="slideImages(this, -1)">
+        &#10094;
+      </button>
+      <div class="slider-track">
+        <div class="slide">
+          <img
+            src="hinjewadi pg/WhatsApp Image 2025-04-13 at 15.49.30 (1).jpeg"
+            alt="Image 1"
+          />
+        </div>
+        <div class="slide">
+          <img
+            src="hinjewadi pg/WhatsApp Image 2025-04-13 at 15.49.30 (1).jpeg"
+            alt="Image 2"
+          />
+        </div>
+      </div>
+      <button class="slide-btn right" onclick="slideImages(this, 1)">
+        &#10095;
+      </button>
+    </div>
+    <div class="boldhead">
+      Eon Homes Hinjewadi, Pune
+      <div class="desc">Facilities: Gym, Parking, Playground</div>
+      <div class="amt"><span>&#8377;</span> 8000</div>
+      <div class="booking-container">
+
+        <div class="available-rooms">Available Rooms: <span class="room-count">5</span></div>
+              <button class="book-button" onclick="showBookingForm(this)">Book Now</button>
+
+        <div class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="hideBookingForm(this)"
+              >&times;</span
+            >
+            <h2>Booking Form</h2>
+            <form class="booking-form">
+              <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" class="name" placeholder="Only Characters" required />
+                <p class="name-error" style="color: red"></p>
+              </div>
+
+              <div class="input-group">
+                <label>Check-in Date</label>
+                <input type="date" class="checkin" required />
+              </div>
+
+              <div class="input-group">
+                <label>Check-out Date</label>
+                <input type="date" class="checkout" required />
+              </div>
+              <div class="input-group">
+                <label>Select Payment mode</label>
+                <select class="payment" required>
+                  <option value="">select</option>
+                  <option value="Online">Online</option>
+                  <option value="Cash">Cash</option>
+                </select>
+              </div>
+
+              <button type="submit" class="book-button">Submit</button>
+              <div class="available-rooms">Available Rooms: <span class="room-count">5</span></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+</div>
+</div>
+<!-- kothrud 1 -->
+<div class="listing-wrapper" data-area="Kothrud">
+  <div class="container">
+    <div class="image-slider" data-index="0">
+      <button class="slide-btn left" onclick="slideImages(this, -1)">
+        &#10094;
+      </button>
+      <div class="slider-track">
+        <div class="slide">
+          <img src="katraj pg/1.1.jpeg" alt="Image 1" />
+        </div>
+        <div class="slide">
+          <img src="katraj pg/1.jpeg" alt="Image 2" />
+        </div>
+      </div>
+      <button class="slide-btn right" onclick="slideImages(this, 1)">
+        &#10095;
+      </button>
+    </div>
+    <div class="boldhead">
+      Shrushti CHS Kothrud, Pune
+      <div class="desc">Facilities: Wi-Fi, Playground, Gym</div>
+      <div class="amt"><span>&#8377;</span> 7000</div>
+      <div class="booking-container">
+
+        <div class="available-rooms">Available Rooms: <span class="room-count">5</span></div>
+              <button class="book-button" onclick="showBookingForm(this)">Book Now</button>
+
+        <div class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="hideBookingForm(this)"
+              >&times;</span
+            >
+            <h2>Booking Form</h2>
+            <form class="booking-form">
+              <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" class="name" placeholder="Only Characters" required />
+                <p class="name-error" style="color: red"></p>
+              </div>
+
+              <div class="input-group">
+                <label>Check-in Date</label>
+                <input type="date" class="checkin" required />
+              </div>
+
+              <div class="input-group">
+                <label>Check-out Date</label>
+                <input type="date" class="checkout" required />
+              </div>
+
+              <div class="input-group">
+                <label>Select Payment mode</label>
+                <select class="payment" required>
+                  <option value="">select</option>
+                  <option value="Online">Online</option>
+                  <option value="Cash">Cash</option>
+                </select>
+              </div>
+
+              <button type="submit" class="book-button">Submit</button>
+              <div class="available-rooms">Available Rooms: <span class="room-count">5</span></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+</div>
+</div>
+<!-- kothrud 2 -->
+<div class="listing-wrapper" data-area="Kothrud">
+  <div class="container">
+    <div class="image-slider" data-index="0">
+      <button class="slide-btn left" onclick="slideImages(this, -1)">
+        &#10094;
+      </button>
+      <div class="slider-track">
+        <div class="slide">
+          <img
+            src="kothrud pg/WhatsApp Image 2025-04-11 at 15.42.40.jpeg"
+            alt="Image 1"
+          />
+        </div>
+        <div class="slide">
+          <img
+            src="kothrud pg/WhatsApp Image 2025-04-11 at 15.42.39.jpeg"
+            alt="Image 2"
+          />
+        </div>
+      </div>
+      <button class="slide-btn right" onclick="slideImages(this, 1)">
+        &#10095;
+      </button>
+    </div>
+    <div class="boldhead">
+      Lodha Palais Kothrud, Pune
+      <div class="desc">Facilities: Air Conditioner, Playground, Parking</div>
+      <div class="amt"><span>&#8377;</span> 6500</div>
+      <div class="booking-container">
+        <div class="available-rooms">Available Rooms: <span class="room-count">5</span></div>
+              <button class="book-button" onclick="showBookingForm(this)">Book Now</button>
+
+        <div class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="hideBookingForm(this)"
+              >&times;</span
+            >
+            <h2>Booking Form</h2>
+            <form class="booking-form">
+              <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" class="name" placeholder="Only Characters" required />
+                <p class="name-error" style="color: red"></p>
+              </div>
+
+              <div class="input-group">
+                <label>Check-in Date</label>
+                <input type="date" class="checkin" required />
+              </div>
+
+              <div class="input-group">
+                <label>Check-out Date</label>
+                <input type="date" class="checkout" required />
+              </div>
+
+              <div class="input-group">
+                <label>Select Payment mode</label>
+                <select class="payment" required>
+                  <option value="">select</option>
+                  <option value="Online">Online</option>
+                  <option value="Cash">Cash</option>
+                </select>
+              </div>
+
+              <button type="submit" class="book-button">Submit</button>
+              <div class="available-rooms">Available Rooms: <span class="room-count">5</span></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+</div>
+</div>
+<!-- kothrud 3 -->
+<div class="listing-wrapper" data-area="Kothrud">
+  <div class="container">
+    <div class="image-slider" data-index="0">
+      <button class="slide-btn left" onclick="slideImages(this, -1)">
+        &#10094;
+      </button>
+      <div class="slider-track">
+        <div class="slide">
+          <img
+            src="kothrud pg/WhatsApp Image 2025-04-11 at 15.42.41 (1).jpeg"
+            alt="Image 1"
+          />
+        </div>
+        <div class="slide">
+          <img
+            src="kothrud pg/WhatsApp Image 2025-04-11 at 15.42.41.jpeg"
+            alt="Image 2"
+          />
+        </div>
+      </div>
+      <button class="slide-btn right" onclick="slideImages(this, 1)">
+        &#10095;
+      </button>
+    </div>
+    <div class="boldhead">
+      Kumbare Eka Kothrud, Pune
+      <div class="desc">Facilities: Swimming Pool, Gym, Water</div>
+      <div class="amt"><span>&#8377;</span> 7000</div>
+      <div class="booking-container">
+        <div class="available-rooms">Available Rooms: <span class="room-count">5</span></div>
+        <button class="book-button" onclick="showBookingForm(this)">Book Now</button>
+
+        <div class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="hideBookingForm(this)"
+              >&times;</span
+            >
+            <h2>Booking Form</h2>
+            <form class="booking-form">
+              <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" class="name" placeholder="Only Characters" required />
+                <p class="name-error" style="color: red"></p>
+              </div>
+              <div class="input-group">
+                <label>Check-in Date</label>
+                <input type="date" class="checkin" required />
+              </div>
+              <div class="input-group">
+                <label>Check-out Date</label>
+                <input type="date" class="checkout" required />
+              </div>
+              <div class="input-group">
+                <label>Select Payment mode</label>
+                <select class="payment" required>
+                  <option value="">select</option>
+                  <option value="Online">Online</option>
+                  <option value="Cash">Cash</option>
+                </select>
+              </div>
+              <button type="submit" class="book-button">Submit</button>
+              <div class="available-rooms">Available Rooms: <span class="room-count">5</span></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+</div>
+</div>
+</div>
+    <footer>
+      <p>©️ 2025 BookMyRoom. All rights reserved.</p>
+    </footer>
+   
+<script>
+  function showBookingForm(button) {
+    const modal = button.closest(".booking-container").querySelector(".modal");
+    modal.style.display = "flex";
+  }
+
+  function hideBookingForm(closeBtn) {
+    const modal = closeBtn.closest(".modal");
+    modal.style.display = "none";
+  }
+
+  function bookRoom(form) {
+    const nameInput = form.querySelector(".name");
+    const checkin = form.querySelector(".checkin");
+    const checkout = form.querySelector(".checkout");
+    const payment = form.querySelector(".payment");
+    const nameError = form.querySelector(".name-error");
+    const roomCountSpan = form.querySelector(".room-count");
+
+    const name = nameInput.value.trim();
+    const nameHasNumber = /\d/.test(name);
+
+    if (nameHasNumber) {
+      nameError.textContent = "Name cannot contain numbers.";
+      return;
+    } else {
+      nameError.textContent = "";
+    }
+
+    if (!name || !checkin.value || !checkout.value || !payment.value) {
+      alert("Please fill all the fields");
+      return;
+    }
+
+    // Save in localStorage
+    localStorage.setItem("userName", name);
+    localStorage.setItem("checkinDate", checkin.value);
+    localStorage.setItem("checkoutDate", checkout.value);
+    localStorage.setItem("paymentMethod", payment.value);
+
+    let roomCount = parseInt(roomCountSpan.textContent);
+    if (roomCount > 0) {
+      alert("Your Room has been booked");
+      roomCount--;
+      roomCountSpan.textContent = roomCount;
+      if (roomCount === 0) {
+        form.querySelector(".book-button").disabled = true;
+      }
+      window.location.href = "display.html";
+    }
+  }
+
+  // Attach form submit events
+  document.querySelectorAll(".booking-form").forEach((form) => {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      bookRoom(this);
+      this.reset();
+    });
+  });
+
+  function filterArea(event, area) {
+    event.preventDefault();
+    const dropdownBtn = document.querySelector(".dropdown-button");
+    if (dropdownBtn) {
+      dropdownBtn.textContent = area === "all" ? "Select an area" : area;
+    }
+
+    document.querySelectorAll(".listing-wrapper").forEach((listing) => {
+      const listingArea = listing.getAttribute("data-area");
+      listing.style.display =
+        area === "all" || listingArea === area ? "block" : "none";
+    });
+  }
+
+  function slideImages(button, direction) {
+    const slider = button.closest(".image-slider");
+    const track = slider.querySelector(".slider-track");
+    const slides = track.querySelectorAll(".slide");
+    let currentIndex = parseInt(slider.getAttribute("data-index")) || 0;
+
+    currentIndex = (currentIndex + direction + slides.length) % slides.length;
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    slider.setAttribute("data-index", currentIndex);
+  }
+</script>
+  </body>
+</html>

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+    
+        body {
+          background-color: white;
+          font-family: "Poppins", sans-serif;
+        }
+        nav {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          height: 60px;
+          background-color: darkblue;
+          color: white;
+        }
+    
+        .left {
+          font-size: 1.5rem;
+          font-weight: bold;
+        }
+    
+        nav ul {
+          display: flex;
+          list-style: none;
+        }
+    
+        nav ul li {
+          margin: 0 15px;
+        }
+    
+        nav ul li a {
+          color: white;
+          text-decoration: none;
+          transition: color 0.3s ease;
+        }
+    
+        nav ul li a:hover {
+          color: rgb(228, 97, 226);
+        }
+    
+        .dropdown {
+          position: relative;
+        }
+    
+        .dropdown-button {
+          background-color: #0e0db8;
+          color: white;
+          border: 1px solid #6176da;
+          padding: 6px 11px;
+          border-radius: 5px;
+          font-weight: 600;
+          cursor: pointer;
+        }
+    
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: white;
+          box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+          z-index: 99;
+        }
+    
+        .dropdown-content a {
+          padding: 10px 15px;
+          display: block;
+          color: black;
+          text-decoration: none;
+        }
+    
+        .dropdown-content a:hover {
+          background-color: #ddd;
+        }
+    
+        .dropdown:hover .dropdown-content {
+          display: block;
+        }
+    
+        .container {
+          display: flex;
+          margin: 22px 46px;
+          padding: 21px;
+        }
+    
+        .boldhead {
+          font-weight: bold;
+          font-size: 22px;
+          color: black;
+          /* margin-left: 30px; */
+          margin:25px 76px;
+        }
+    
+        .desc, .amt, .available-rooms {
+          color: black;
+        }
+    
+        .amt {
+          font-weight: 600;
+          font-size: 18px;
+        }
+    
+        .booking-container {
+          margin-top: 10px;
+          display: flex;
+          gap: 10px;
+          align-items: center;
+        }
+    
+        .book-button {
+          padding: 5px 15px;
+          background-color: green;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          font-weight: 600;
+          font-size: 16px;
+          cursor: pointer;
+        }
+        .detail{
+          padding: 5px 20px;
+          background-color: green;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          font-weight: 600;
+          font-size: 16px;
+          cursor: pointer;
+        }
+    
+        .book-button:disabled {
+          background: gray;
+          cursor: not-allowed;
+        }
+    
+        .image-slider {
+          position: relative;
+          width: 300px;
+          overflow: hidden;
+        }
+    
+        .slider-track {
+          display: flex;
+          transition: transform 0.4s ease-in-out;
+        }
+    
+        .slide {
+          min-width: 100%;
+        }
+    
+        .slide img {
+          width: 100%;
+          border-radius: 25px;
+          border: 2px solid black;
+        }
+    
+        .slide-btn {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          background-color: rgba(0, 0, 0, 0.5);
+          color: white;
+          border: none;
+          font-size: 20px;
+          padding: 8px 12px;
+          cursor: pointer;
+          border-radius: 5px;
+          z-index: 1;
+        }
+    
+        .slide-btn.left {
+          left: 10px;
+        }
+    
+        .slide-btn.right {
+          right: 10px;
+        }
+    
+        footer {
+          background-color: darkblue;
+          padding: 20px 0;
+          text-align: center;
+          color: white;
+        }
+    
+        hr {
+          margin: 0px;
+          border: 0;
+          border-top: 2px solid #ccc;
+        }
+    
+        .modal {
+          display: none; 
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,0.6);
+          justify-content: center;
+          align-items: center;
+        }
+    
+        .modal-content {
+          background: white;
+        padding: 40px;
+        border-radius: 10px;
+        width: 380px;
+        text-align: left;
+        height: 493px;
+        }
+    
+        .modal-content h2 {
+          margin-top: 0;
+        }
+    
+        .input-group {
+          margin-bottom: 15px;
+        }
+    
+        .input-group label {
+          display: block;
+          margin-bottom: 5px;
+          font-weight: bold;
+          font-size: 15px;
+        }
+    
+        .input-group input, .input-group select {
+          width: 100%;
+          padding: 5px;
+          box-sizing: border-box;
+        }
+    
+        .close {
+          float: right;
+          cursor: pointer;
+          font-size: 22px;
+          font-weight: bold;
+        }
+      </style>
+</head>
+<body>
+    <div id="listings">
+        <div class="listing-wrapper" data-area="Katraj">
+          <div class="container">
+            <div class="image-slider" data-index="0">
+              <button class="slide-btn left" onclick="slideImages(this, -1)">&#10094;</button>
+              <div class="slider-track">
+                <div class="slide"><img src="/katraj pg/2.jpeg" alt="Image 1" /></div>
+                <div class="slide"><img src="/katraj pg/2.1.jpeg" alt="Image 2" /></div>
+              </div>
+              <button class="slide-btn right" onclick="slideImages(this, 1)">&#10095;</button>
+            </div>
+            <div class="boldhead">
+              Akshay Dream City In Katraj
+              <div class="desc">Bhusari Colony, Katraj, Pune</div>
+              <div class="amt"><span>&#8377;</span> 2300</div>
+              <div class="booking-container">
+                <!-- <div class="available-rooms">Available Rooms: <span class="room-count">5</span></div> -->
+                <!-- <button class="book-button" onclick="bookRoom(this)">Book</button> -->
+                 <button  class="book-button" onclick="showBookingForm()">View</button>
+    
+                 <div id="bookingModal" class="modal">
+                  <div class="modal-content">
+                    <span class="close" onclick="hideBookingForm()">&times;</span>
+                    <h2>Booking Form</h2>
+                    <form id="bookingForm">
+                      <div class="input-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" required>
+                      </div>
+              
+                      <div class="input-group">
+                        <label for="checkin">Check-in Date</label>
+                        <input type="date" id="checkin" required>
+                      </div>
+              
+                      <div class="input-group">
+                        <label for="checkout">Check-out Date</label>
+                        <input type="date" id="checkout" required>
+                      </div>
+          
+    
+                   <div class="input-group">
+                    <label for="payment">Select Payment mode</label>
+                    <select id="payment">
+                      <option value="">select</option>
+                      <option value="Online">Online</option>
+                      <option value="Cash">Cash</option>
+                    </select>
+                   </div>
+              
+              
+                      <button type="submit" class="book-button" onclick="bookRoom(this)">Book Now</button>
+                      <button class="detail">details</button>
+                      <div class="available-rooms">Available Rooms: <span class="room-count">5</span></div>
+                    </form>
+                  </div>
+                </div>
+      
+              </div>
+            </div>
+          </div>
+          <hr />
+        </div>
+      </div>
+    
+      <div id="listings">
+      
+        <div class="listing-wrapper" data-area="Katraj">
+          <div class="container">
+            <div class="image-slider" data-index="0">
+              <button class="slide-btn left" onclick="slideImages(this, -1)">&#10094;</button>
+              <div class="slider-track">
+                <div class="slide"><img src="/katraj pg/3.jpeg" alt="Image 1" /></div>
+                <div class="slide"><img src="/katraj pg//3.1.jpeg" alt="Image 2" /></div>
+              </div>
+              <button class="slide-btn right" onclick="slideImages(this, 1)">&#10095;</button>
+            </div>
+            <div class="boldhead">
+              Boys PG for Rent In Katraj
+              <div class="desc">Bhusari Colony, Katraj, Pune</div>
+              <div class="amt"><span>&#8377;</span> 2100</div>
+              <div class="booking-container">
+                <!-- <div class="available-rooms">Available Rooms: <span class="room-count">5</span></div> -->
+                <!-- <button class="book-button" onclick="bookRoom(this)">Book</button> -->
+                <button  class="book-button" onclick="showBookingForm()">View</button>
+    
+                <div id="bookingModal" class="modal">
+                  <div class="modal-content">
+                    <span class="close" onclick="hideBookingForm()">&times;</span>
+                    <h2>Booking Form</h2>
+                    <form id="bookingForm">
+                      <div class="input-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" required>
+                      </div>
+              
+                      <div class="input-group">
+                        <label for="checkin">Check-in Date</label>
+                        <input type="date" id="checkin" required>
+                      </div>
+              
+                      <div class="input-group">
+                        <label for="checkout">Check-out Date</label>
+                        <input type="date" id="checkout" required>
+                      </div>
+          
+    
+                   <div class="input-group">
+                    <label for="payment">Select Payment mode</label>
+                    <select id="payment">
+                      <option value="">select</option>
+                      <option value="Online">Online</option>
+                      <option value="Cash">Cash</option>
+                    </select>
+                   </div>
+              
+              
+                      <button type="submit" class="book-button" onclick="bookRoom(this)">Book Now</button>
+                      <button class="detail">details</button>
+                      <div class="available-rooms">Available Rooms: <span class="room-count">5</span></div>
+                    </form>
+                  </div>
+                </div>
+    
+                
+              </div>
+            </div>
+          </div>
+          <hr />
+        </div>
+      </div>
+      <div id="listings">
+       
+        <div class="listing-wrapper" data-area="Katraj">
+          <div class="container">
+            <div class="image-slider" data-index="0">
+              <button class="slide-btn left" onclick="slideImages(this, -1)">&#10094;</button>
+              <div class="slider-track">
+                <div class="slide"><img src="katraj pg/1.1.jpeg" alt="Image 1" /></div>
+                <div class="slide"><img src="pg.jpg" alt="Image 2" /></div>
+              </div>
+              <button class="slide-btn right" onclick="slideImages(this, 1)">&#10095;</button>
+            </div>
+            <div class="boldhead">
+              Centric Boys PG for Rent In Katraj
+              <div class="desc">Bhusari Colony, Katraj, Pune</div>
+              <div class="amt"><span>&#8377;</span> 1500</div>
+              <div class="booking-container">
+                <!-- <div class="available-rooms">Available Rooms: <span class="room-count">5</span></div>
+                <button class="book-button" onclick="bookRoom(this)">Book</button> -->
+                <button  class="book-button" onclick="showBookingForm()">View</button>
+    
+                <div id="bookingModal" class="modal">
+                  <div class="modal-content">
+                    <span class="close" onclick="hideBookingForm()">&times;</span>
+                    <h2>Booking Form</h2>
+                    <form id="bookingForm">
+                      <div class="input-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" required>
+                      </div>
+              
+                      <div class="input-group">
+                        <label for="checkin">Check-in Date</label>
+                        <input type="date" id="checkin" required>
+                      </div>
+              
+                      <div class="input-group">
+                        <label for="checkout">Check-out Date</label>
+                        <input type="date" id="checkout" required>
+                      </div>
+          
+    
+                   <div class="input-group">
+                    <label for="payment">Select Payment mode</label>
+                    <select id="payment">
+                      <option value="">select</option>
+                      <option value="Online">Online</option>
+                      <option value="Cash">Cash</option>
+                    </select>
+                   </div>
+              
+              
+                      <button type="submit" class="book-button" onclick="bookRoom(this)">Book Now</button>
+                      <button class="detail">details</button>
+                      <div class="available-rooms">Available Rooms: <span class="room-count">5</span></div>
+                    </form>
+                  </div>
+                </div>
+    
+              </div>
+            </div>
+          </div>
+          <hr />
+        </div>
+      </div>
+</body>
+<script>
+    function bookRoom(button) {
+      const countSpan = button.closest('.booking-container').querySelector('.room-count');
+      let count = parseInt(countSpan.textContent);
+      if (count > 0) {
+        alert("Your Room has been booked")
+        count--;
+        countSpan.textContent = count;
+        if (count === 0) {
+          button.disabled = true;
+        }
+      }
+    }
+
+    function filterArea(event, area) {
+      event.preventDefault();
+      document.getElementById("bookingDropdownButton").textContent =
+          area === "all" ? "Select an area" : area;
+      const listings = document.querySelectorAll('.listing-wrapper');
+      listings.forEach(listing => {
+        const listingArea = listing.getAttribute('data-area');
+        listing.style.display = (area === 'all' || listingArea === area) ? 'block' : 'none';
+      });
+    }
+
+    function slideImages(button, direction) {
+      const slider = button.closest('.image-slider');
+      const track = slider.querySelector('.slider-track');
+      const slides = track.querySelectorAll('.slide');
+      let currentIndex = parseInt(slider.getAttribute('data-index')) || 0;
+
+      currentIndex = (currentIndex + direction + slides.length) % slides.length;
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+      slider.setAttribute('data-index', currentIndex);
+    }
+  </script>
+  <script>
+    function showBookingForm() {
+      document.getElementById("bookingModal").style.display = "flex";
+    }
+
+    function hideBookingForm() {
+      document.getElementById("bookingModal").style.display = "none";
+    }
+
+    document.getElementById("bookingForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Booking successful!");
+      hideBookingForm();
+      this.reset();
+    });
+  </script>
+</html>

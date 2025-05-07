@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BookMyRoom</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="left">BookMyRoom</div>
+        <div class="right">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="login.html">Logout</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="firstsection">
+        <video autoplay loop muted plays-inline class="back-video">
+          <source src="video.mp4" type="video/mp4" />
+        </video>
+        <div class="leftsection">
+          Hii, there
+          <span id="element-container"><span id="element"></span></span>
+          <!-- <div class="button">
+            <a href="/" target="_blank">
+              <button class="btn">Book Now</button>
+            </a>
+          </div> -->
+        </div>
+        <div class="rightsection">
+          <div class="circle"></div>
+        </div>
+      </section>
+
+      <section class="secondsection" id="services">
+        <span class="text-gray">What We Provide So Far</span>
+        <h1>Our Services</h1>
+        <div class="card-container">
+          <div class="card">
+            <a href="pg.html">
+              <img src="pg.jpg" alt="PG Room" />
+              <h3>Paying Guest (PG)</h3>
+              <p>
+                Affordable and comfortable PG accommodations with essential
+                amenities.
+              </p>
+            </a>
+          </div>
+          <div class="card">
+            <a href="1bhk.html">
+                <img src="1bhk.jpg" alt="1BHK Room" />
+                <h3>1 BHK Room</h3>
+                <p>
+                  Spacious and well-furnished 1 BHK rooms for small families or
+                  individuals.
+                </p>
+            </a>
+          </div>
+          <div class="card">
+            <a href="2bhk.html">
+                <img src="2bhk.webp" alt="2BHK Room" />
+                <h3>2 BHK Room</h3>
+                <p>
+                  Ideal for families, offering comfort and ample space for a great
+                  living experience.
+                </p>
+            </a>
+          </div>
+          <div class="card">
+            <a href="3bhk.html">
+                <img src="3bhk.jpg" alt="3BHK Room" />
+                <h3>3 BHK Room</h3>
+                <p>
+                  Luxurious 3 BHK apartments with modern facilities for premium
+                  living.
+                </p>
+            </a>
+            
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer">
+        <div class="footerfirst">
+          <div class="social-icons">
+            <a href="https://www.facebook.com/" target="_blank"
+              ><i class="fab fa-facebook"></i
+            ></a>
+            <a href="https://www.instagram.com/tanish666999/" target="_blank"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="https://www.linkedin.com/in/tanish-chawla-8bb102300/" target="_blank"
+              ><i class="fab fa-linkedin"></i
+            ></a>
+            <a href="https://github.com/Tanishchawla999" target="_blank"
+              ><i class="fab fa-github"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+      <div class="rightreserve">www.bookmyroom.com | All rights reserved</div>
+    </footer>
+
+    <!-- Typed.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+    <script>
+      var typed = new Typed("#element", {
+        strings: ["Looking for an Amazing place to stay"],
+        typeSpeed: 80,
+        backSpeed: 50,
+        backDelay: 1500,
+        startDelay: 500,
+        loop: true,
+        showCursor: true,
+        cursorChar: "|",
+        smartBackspace: true,
+      });
+    </script>
+  </body>
+</html>

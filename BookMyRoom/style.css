@@ -1,0 +1,279 @@
+html {
+  scroll-behavior: smooth;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: pink;
+  color: white;
+  font-family: "Poppins", sans-serif;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  background-color: darkblue;
+  align-items: center;
+  height: 60px;
+  color: white;
+}
+nav ul {
+  display: flex;
+  justify-content: center;
+}
+nav ul li {
+  list-style: none;
+  margin: 20px;
+}
+nav ul li a {
+  text-decoration: none;
+  color: white;
+}
+nav ul li a:hover {
+  color: rgb(228, 97, 226);
+  transition: 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+.left {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* .firstsection {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 130px 0;
+  height: 350px;
+  text-align: left;
+} */
+.firstsection {
+  display: flex
+;
+  justify-content: space-around;
+  align-items: center;
+  margin: 130px 0px;
+  height: 350px;
+  text-align: left;
+}
+.firstsection > div {
+  width: 35%;
+}
+.leftsection {
+  font-size: 3.1rem;
+  height: 100%;
+  display: flex;
+  font-weight: 600;
+  flex-direction: column;
+  justify-content: center;
+}
+/* .rightsection { */
+  /* height: 100%;
+  display: flex;
+  border-radius: 50% ;
+  background-color: blanchedalmond;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 30%;
+} */
+
+.purple {
+  color: rgb(238, 75, 238);
+}
+#element-container {
+  display: inline-block; 
+  vertical-align: middle;
+}
+#element {
+  display: inline ;
+  /* white-space: nowrap; */
+  font-size: inherit;
+  color: rgb(32, 225, 255);
+}
+
+.secondsection {
+  max-width: 80vw;
+  margin: 10.3vw;
+  margin-top:150px;
+  height: 80vh;
+}
+.secondsection a{
+  text-decoration: none;
+}
+.secondsection h3{
+  color: black;
+}
+.card-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.card {
+  background: white;
+  color: black;
+  width: 22%;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+.card:hover {
+  transform: scale(1.05);
+}
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.card h3 {
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
+.card p {
+  font-size: 0.9rem;
+  color: gray;
+}
+@media (max-width: 768px) {
+  .card-container {
+      flex-direction: column;
+      align-items: center;
+  }
+  .card {
+      width: 80%;
+  }
+}
+main hr {
+  border: 0;
+  background-color: #9c97f1;
+  height: 1.2px;
+  margin: 40px 84px;
+}
+.text-gray {
+  color: gray;
+}
+/* .secondsection .horizontal-line {
+  background: white;
+  height: 2px;
+  width: 900px;
+  margin: 56px 0px;
+  display: flex;
+} 
+ .secondsection .vertical-line {
+  background-color: white;
+  height: 61px;
+  width: 1px;
+  margin: 0px 112px;
+}  */
+/* .secondsection .vertical-line .img-top {
+  height: 50px;
+  width: 42px;
+  margin: 66px 0px 0px -20px;
+}
+.verti-title {
+  width: 107px;
+  font-weight: bold;
+  margin: 0px 0px 2px -46px;
+  font-size: 12px;
+}
+.verti-desc {
+  color: gray;
+  align-content: center;
+  margin: -3px 1px 0px -62px;
+  font-size: 12px;
+  width: 148px;
+} */
+footer {
+background-color: darkblue;
+padding: 20px 0;
+text-align: center;
+}
+
+.footer {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 15px;
+}
+
+.footer ul {
+list-style: none;
+display: flex;
+gap: 15px;
+padding: 0;
+}
+
+.footer ul li a {
+text-decoration: none;
+color: white;
+transition: color 0.3s;
+}
+
+.footer ul li a:hover {
+color: rgb(228, 97, 226);
+}
+
+.social-icons {
+display: flex;
+gap: 15px;
+justify-content: center;
+margin-top: 2px;
+}
+
+.social-icons a {
+font-size: 24px;
+color: white;
+transition: color 0.3s ease-in-out;
+margin-bottom: 6px;
+}
+
+.social-icons a:hover {
+color: rgb(228, 97, 226);
+}
+.rightreserve{
+color: gray;
+font-size: 9px;
+}
+.leftsection .btn {
+padding: 3px;
+background: #0c0c59;
+color: white;
+border: 1px solid white;
+border-radius: 6px;
+cursor: pointer;
+font-size: 13px;
+transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.leftsection .btn:hover {
+background-color: rgb(215, 32, 212);
+transform: scale(1.05);
+}
+.leftsection a{
+text-decoration: none;
+}
+.back-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+@media (max-aspect-ratio: 16/9){
+.back-video{
+  width: auto;
+  height: 100%;
+}
+}
+

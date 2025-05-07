@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BookMyRoom</title>
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: pink;
+      font-family: "Poppins", sans-serif;
+    }
+
+    .card {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+      animation: float 3s ease-in-out infinite;
+      color: #333;
+      width: 320px;
+      transition: 0.3s;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    .card h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .info-group {
+      margin-bottom: 15px;
+    }
+
+    .info-group strong {
+      color: #444;
+    }
+
+    .info-group span {
+      display: inline-block;
+      margin-left: 5px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>User Info</h2>
+    <div class="info-group"><strong>Name:</strong> <span id="displayName"></span></div>
+    <div class="info-group"><strong>Check-in:</strong> <span id="checkin"></span></div>
+    <div class="info-group"><strong>Check-out:</strong> <span id="checkout"></span></div>
+    <div class="info-group"><strong>Payment Method:</strong> <span id="payment"></span></div>
+  </div>
+
+  <script>
+    // Get from localStorage
+    const name = localStorage.getItem("userName");
+    const checkin = localStorage.getItem("checkinDate");
+    const checkout = localStorage.getItem("checkoutDate");
+    const payment = localStorage.getItem("paymentMethod");
+
+    // Display
+    document.getElementById("displayName").textContent = name;
+    document.getElementById("checkin").textContent = checkin;
+    document.getElementById("checkout").textContent = checkout;
+    document.getElementById("payment").textContent = payment;
+   
+  
+  </script>
+</body>
+</html>

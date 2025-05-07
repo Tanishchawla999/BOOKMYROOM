@@ -1,0 +1,114 @@
+<!-- Updated booking modal and form structure for one listing -->
+<div class="booking-container">
+  <button class="book-button" data-modal="bookingModal1">View</button>
+
+  <div id="bookingModal1" class="modal">
+    <div class="modal-content">
+      <span class="close" data-modal="bookingModal1">&times;</span>
+      <h2>Booking Form</h2>
+      <form class="bookingForm">
+        <div class="input-group">
+          <label>Full Name</label>
+          <input type="text" placeholder="Only Character" class="name" required />
+          <p class="nameError" style="color: red"></p>
+        </div>
+
+        <div class="input-group">
+          <label>Check-in Date</label>
+          <input type="date" class="checkin" required />
+        </div>
+
+        <div class="input-group">
+          <label>Check-out Date</label>
+          <input type="date" class="checkout" required />
+        </div>
+
+        <div class="input-group">
+          <label>Select Payment mode</label>
+          <select class="payment" required>
+            <option value="">select</option>
+            <option value="Online">Online</option>
+            <option value="Cash">Cash</option>
+          </select>
+        </div>
+
+        <button type="submit" class="book-button">Book Now</button>
+
+        <div class="available-rooms">
+          Available Rooms: <span class="room-count">5</span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Updated JavaScript for modal and form handling -->
+<script>
+  // Function to open modal
+  function showBookingForm(modalId) {
+    document.getElementById(modalId).style.display = "flex";
+  }
+
+  // Function to close modal
+  function hideBookingForm(modalId) {
+    document.getElementById(modalId).style.display = "none";
+  }
+
+  // Event delegation for opening and closing modals
+  document.addEventListener("click", function (event) {
+    if (event.target.classList.contains("book-button") && event.target.dataset.modal) {
+      const modalId = event.target.dataset.modal;
+      showBookingForm(modalId);
+    }
+    if (event.target.classList.contains("close") && event.target.dataset.modal) {
+      const modalId = event.target.dataset.modal;
+      hideBookingForm(modalId);
+    }
+  });
+
+  // Handle form submission for all booking forms
+  document.querySelectorAll(".bookingForm").forEach((form) => {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const nameInput = form.querySelector(".name");
+      const checkinInput = form.querySelector(".checkin");
+      const checkoutInput = form.querySelector(".checkout");
+      const paymentSelect = form.querySelector(".payment");
+      const roomCountSpan = form.querySelector(".room-count");
+      const bookButton = form.querySelector("button[type='submit']");
+      const nameError = form.querySelector(".nameError");
+
+      const name = nameInput.value.trim();
+      const checkin = checkinInput.value;
+      const checkout = checkoutInput.value;
+      const payment = paymentSelect.value;
+      const nameHasNumber = /\d/.test(name);
+
+      nameError.textContent = "";
+
+      if (!name || !checkin || !checkout || !payment) {
+        alert("Please fill all the fields");
+        return;
+      }
+
+      if (nameHasNumber) {
+        nameError.textContent = "Name cannot contain numbers.";
+        return;
+      }
+
+      let count = parseInt(roomCountSpan.textContent);
+      if (count > 0) {
+        alert("Your Room has been booked");
+        count--;
+        roomCountSpan.textContent = count;
+        if (count === 0) {
+          bookButton.disabled = true;
+        }
+        form.reset();
+        hideBookingForm(form.closest(".modal").id);
+        window.location.href = "display.html";
+      }
+    });
+  });
+</script>
